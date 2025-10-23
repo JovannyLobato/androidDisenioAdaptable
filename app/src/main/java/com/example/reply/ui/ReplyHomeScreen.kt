@@ -102,10 +102,8 @@ fun ReplyHomeScreen(
                         selectedDestination = replyUiState.currentMailbox,
                         onTabPressed = onTabPressed,
                         navigationItemContentList = navigationItemContentList,
-                        modifier = Modifier
-                            .wrapContentWidth()
-                            .fillMaxHeight()
-                            .padding(dimensionResource(R.dimen.drawer_padding_content))
+                        modifier = Modifier.testTag(navigationDrawerContentDescription)
+                    )
                     )
                 }
             },
@@ -163,7 +161,8 @@ private fun ReplyAppContent(
                     currentTab = replyUiState.currentMailbox,
                     onTabPressed = onTabPressed,
                     navigationItemContentList = navigationItemContentList,
-                    modifier = Modifier.testTag(navigationRailContentDescription)
+                    modifier = Modifier
+                        .testTag(navigationRailContentDescription)
                 )
             }
             Column(
@@ -225,13 +224,15 @@ private fun ReplyNavigationRail(
         }
     }
 }
-
+val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
 @Composable
 private fun ReplyBottomNavigationBar(
     currentTab: MailboxType,
     onTabPressed: ((MailboxType) -> Unit),
     navigationItemContentList: List<NavigationItemContent>,
-    modifier: Modifier = Modifier
+    Modifier = Modifier
+        .fillMaxWidth()
+        .testTag(bottomNavigationContentDescription)
 ) {
     NavigationBar(modifier = modifier) {
         for (navItem in navigationItemContentList) {
